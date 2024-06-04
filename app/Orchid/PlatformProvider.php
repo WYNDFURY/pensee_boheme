@@ -38,6 +38,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bs.book')
                 ->title('Navigation')
                 ->route(config('platform.index')),
+                Menu::make('tasks')
+                ->icon('bag')
+                ->route('platform.tasks')
+                ->title('Tools'),
         ];
     }
 

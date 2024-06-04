@@ -23,8 +23,15 @@ class TaskScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'TaskScreen';
+        return 'A simple To-Do list';
     }
+
+    public function description(): ?string
+    {
+        return 'quick start test';
+    }
+
+    
 
     /**
      * The screen's action buttons.
