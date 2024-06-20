@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\Category;
 
 use Orchid\Screen\Screen;
 
-class TaskScreen extends Screen
+class CategoryScreen extends Screen
 {
     /**
      * Fetch data to be displayed on the screen.
@@ -23,15 +23,8 @@ class TaskScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'A simple To-Do list';
+        return 'CategoryScreen';
     }
-
-    public function description(): ?string
-    {
-        return 'quick start test';
-    }
-
-    
 
     /**
      * The screen's action buttons.
