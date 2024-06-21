@@ -38,6 +38,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bag')
                 ->route('platform.users')
                 ->title('Users Management'),
+            Menu::make('Roles')
+                ->icon('bag')
+                ->route('platform.roles'),
             Menu::make('Address')
                 ->icon('bag')
                 ->route('platform.address'),

@@ -66,4 +66,19 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function address()
+    {
+        return $this->hasMany(Address::class);
+    }
 }
