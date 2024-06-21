@@ -111,11 +111,19 @@ Route::screen('/examples/cards', ExampleCardsScreen::class)->name('platform.exam
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');
 
-Route::screen('user', UserScreen::class)->name('platform.users')
+
+Route::screen('user', UserListScreen::class)->name('platform.users')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
             ->push('Users');
+    });
+
+Route::screen('role', RoleListScreen::class)->name('platform.roles')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push('Roles');
     });
 
 Route::screen('product', ProductScreen::class)->name('platform.product')

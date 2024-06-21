@@ -34,4 +34,9 @@ class Address extends Model
         'postal_code',
         'country',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
