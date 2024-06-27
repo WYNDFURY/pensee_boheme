@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Cart;
 use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->decimal('price', 8, 2);
             $table->string('image')->nullable();
             $table->foreignIdFor(Category::class);
+            $table->foreignIdFor(Cart::class)->nullable();
             $table->integer('stock');
             $table->boolean('is_active');
             $table->timestamps();

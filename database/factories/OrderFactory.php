@@ -20,7 +20,7 @@ class OrderFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'total' => $this->faker->randomFloat(2, 10, 1000), // Random float between 10 and 1000
+            'total' => $this->faker->randomFloat(2, 10, 500), // Random float between 10 and 500
             'status' => OrderStatus::getRandomValue(), // Assuming OrderStatus is an enum with a method to get random values
             'address' => $this->faker->address,
             'payment_method' => $this->faker->randomElement(['credit_card', 'paypal', 'bank_transfer']), // Example payment methods

@@ -15,9 +15,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'address_id',
     ];
 
     /**
@@ -48,8 +50,10 @@ class User extends Authenticatable
      */
     protected $allowedFilters = [
         'id'         => Where::class,
-        'name'       => Like::class,
+        'first_name'  => Like::class,
+        'last_name'   => Like::class,
         'email'      => Like::class,
+        'address_id' => Where::class,
         'updated_at' => WhereDateStartEnd::class,
         'created_at' => WhereDateStartEnd::class,
     ];
@@ -61,8 +65,10 @@ class User extends Authenticatable
      */
     protected $allowedSorts = [
         'id',
-        'name',
+        'first_name',
+        'last_name',
         'email',
+        'address_id',
         'updated_at',
         'created_at',
     ];
@@ -79,6 +85,11 @@ class User extends Authenticatable
 
     public function address()
     {
-        return $this->hasMany(Address::class);
+        return $this->belongsTo(Address::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
     }
 }

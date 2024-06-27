@@ -18,10 +18,9 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
-            'street' => $this->faker->streetAddress,
+            'street' => $this->faker->streetName,
+            'number' => $this->faker->buildingNumber,
             'city' => $this->faker->city,
-            'state' => $this->faker->state,
             'postal_code' => $this->faker->postcode,
             'country' => $this->faker->country,
         ];

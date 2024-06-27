@@ -28,7 +28,13 @@ class UserListLayout extends Table
     public function columns(): array
     {
         return [
-            TD::make('name', __('Name'))
+            TD::make('first_name', __('First Name'))
+                ->sort()
+                ->cantHide()
+                ->filter(Input::make())
+                ->render(fn (User $user) => new Persona($user->presenter())),
+
+            TD::make('last_name', __('Last Name'))
                 ->sort()
                 ->cantHide()
                 ->filter(Input::make())
