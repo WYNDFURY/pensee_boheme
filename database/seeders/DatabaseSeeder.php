@@ -22,23 +22,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create 10 users
-        User::factory(10)->create()->each(function ($user) {
+        // // Create 10 users
+        // User::factory(10)->create()->each(function ($user) {
 
-            // Each user has 1 cart with 1 to 5 items
-            $cart = Cart::factory()->create(['user_id' => $user->id]);
-            CartItem::factory(rand(1, 5))->create(['cart_id' => $cart->id]);
+        //     // Each user has 1 cart with 1 to 5 items
+        //     $cart = Cart::factory()->create(['user_id' => $user->id]);
+        //     CartItem::factory(rand(1, 5))->create(['cart_id' => $cart->id]);
 
-            // Each user makes 1 to 3 orders
-            for ($i = 0; $i < rand(1, 3); $i++) {
-                $order = Order::factory()->create(['user_id' => $user->id]);
-                // Each order has 1 to 5 order items
-                OrderItem::factory(rand(1, 5))->create(['order_id' => $order->id]);
-            }
+        //     // Each user makes 1 to 3 orders
+        //     for ($i = 0; $i < rand(1, 3); $i++) {
+        //         $order = Order::factory()->create(['user_id' => $user->id]);
+        //         // Each order has 1 to 5 order items
+        //         OrderItem::factory(rand(1, 5))->create(['order_id' => $order->id]);
+        //     }
 
-            // Each user leaves 1 to 5 reviews on random products
-            Review::factory(rand(1, 5))->create(['user_id' => $user->id]);
-        });
+        //     // Each user leaves 1 to 5 reviews on random products
+        //     Review::factory(rand(1, 5))->create(['user_id' => $user->id]);
+        // });
 
         // Create 5 categories
         Category::factory(5)->create()->each(function ($category) {

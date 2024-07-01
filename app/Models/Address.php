@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
  * Class Address
+ *
  * @property int $id
  * @property int $user_id
  * @property string $street
@@ -20,7 +22,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  */
-
 class Address extends Model
 {
     use HasFactory;
@@ -32,10 +33,12 @@ class Address extends Model
         'city',
         'postal_code',
         'country',
+        'addressable_id',
+        'addressable_type',
     ];
 
-    public function user()
+    public function addressable(): MorphTo
     {
-        return $this->hasOne(User::class);
+        return $this->morphTo();
     }
 }

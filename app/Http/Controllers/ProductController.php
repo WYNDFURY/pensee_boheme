@@ -11,20 +11,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        // $query = Product::query()->when($request->has('product-ids'), fn ($query) => $query->wherein('id', $request->input('product-ids')));
-        $query = Product::query();
-        $hasFilter = $request->has('product_ids');
-        // dd($query);
-
-        if ($hasFilter) {
-            $query->wherein('id', $request->input('product_ids'));
-        }
-
         return response()->json([
             'message' => 'success',
-            'data' => $query->get()
+            'data' => Product::all()
         ]);
     }
 

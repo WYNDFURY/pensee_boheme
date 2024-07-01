@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * Class Product
+ *
  * @property int $id
  * @property string $name
  * @property string $description
@@ -16,14 +17,11 @@ use Illuminate\Support\Carbon;
  * @property string $image
  * @property int $category_id
  * @property int $stock
- * @property boolean $is_active
+ * @property bool $is_active
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
- * 
  */
-
-
 class Product extends Model
 {
     use HasFactory;
@@ -52,6 +50,6 @@ class Product extends Model
 
     public function carts()
     {
-        return $this->hasMany(Cart::class);
+        return $this->belongsToMany(Cart::class)->withPivot(['quantity']);
     }
 }

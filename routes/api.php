@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\CartProductController;
+use App\Http\Controllers\Api\MeController;
 use App\Http\Controllers\ProductController;
-use Illuminate\Http\Request;
+use App\Http\Middleware\HasAccessToCart;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,27 +19,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-
-Route::prefix('carts')->name('carts.')->group(function () {
-    Route::post('/', [CartController::class, 'store'])->name('store');
-    Route::get('/{cart}', [CartController::class, 'show'])->name('show');
-    Route::delete('/{database}', [CartController::class, 'destroy'])->name('destroy');
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::post('register', [AuthController::class, 'register'])->name('register');
+    Route::post('login', [AuthController::class, 'login'])->name('login');
 });
 
-Route::prefix('cart-items')->name('cart-items.')->group(function () {
-    Route::post('/', [CartItemController::class, 'store'])->name('store');
-    Route::delete('/{cartItem}', [CartItemController::class, 'destroy'])->name('destroy');
+Route::prefix('me')->name('me.')->group(function () {
+    Route::get('user', [MeController::class, 'user'])->name('user');
+    Route::get('cart', [MeController::class, 'cart'])->name('cart');
+});
+
+Route::prefix('carts')->name('carts.')->group(function () {
+    Route::prefix('{cart}')->middleware(HasAccessToCart::class)->group(function () {
+        Route::patch('empty', [CartController::class, 'empty'])->name('empty');
+        Route::patch('transfer', [CartController::class, 'transfer'])->middleware('auth:sanctum')->name('transfer');
+        Route::prefix('products/{product}')->name('products.')->group(function () {
+            Route::put('/', [CartProductController::class, 'update'])->name('update');
+            Route::delete('/', [CartProductController::class, 'destroy'])->name('destroy');
+        });
+    });
 });
 
 Route::prefix('products')->name('products.')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name('index');
-    Route::get('/{product}', [ProductController::class, 'show'])->name('show');
-});
-
-Route::prefix('register')->name('register.')->group(function () {
-    Route::post('/', [RegisteredUserController::class, 'store'])->name('store');
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/{product}', [ProductController::class, 'show']);
 });
