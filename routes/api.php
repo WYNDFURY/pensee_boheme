@@ -18,27 +18,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
 Route::prefix('carts')->name('carts.')->group(function () {
-    Route::post('/', [CartController::class, 'store']);
-    Route::get('/{cart}', [CartController::class, 'show']);
-    Route::delete('/{database}', [CartController::class, 'destroy']);
+    Route::post('/', [CartController::class, 'store'])->name('store');
+    Route::get('/{cart}', [CartController::class, 'show'])->name('show');
+    Route::delete('/{database}', [CartController::class, 'destroy'])->name('destroy');
 });
 
 Route::prefix('cart-items')->name('cart-items.')->group(function () {
-    Route::post('/', [CartItemController::class, 'store']);
-    Route::delete('/{cartItem}', [CartItemController::class, 'destroy']);
+    Route::post('/', [CartItemController::class, 'store'])->name('store');
+    Route::delete('/{cartItem}', [CartItemController::class, 'destroy'])->name('destroy');
 });
 
 Route::prefix('products')->name('products.')->group(function () {
-    Route::get('/', [ProductController::class, 'index']);
-    Route::get('/{product}', [ProductController::class, 'show']);
+    Route::get('/', [ProductController::class, 'index'])->name('index');
+    Route::get('/{product}', [ProductController::class, 'show'])->name('show');
 });
 
 Route::prefix('register')->name('register.')->group(function () {
-    Route::post('/', [RegisteredUserController::class, 'store']);
+    Route::post('/', [RegisteredUserController::class, 'store'])->name('store');
 });

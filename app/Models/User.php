@@ -15,11 +15,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'email',
         'password',
-        'address_id',
     ];
 
     /**
@@ -49,13 +47,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $allowedFilters = [
-        'id'         => Where::class,
-        'first_name'  => Like::class,
-        'last_name'   => Like::class,
-        'email'      => Like::class,
-        'address_id' => Where::class,
-        'updated_at' => WhereDateStartEnd::class,
-        'created_at' => WhereDateStartEnd::class,
+           'id'         => Where::class,
+           'name'       => Like::class,
+           'email'      => Like::class,
+           'updated_at' => WhereDateStartEnd::class,
+           'created_at' => WhereDateStartEnd::class,
     ];
 
     /**
@@ -65,31 +61,9 @@ class User extends Authenticatable
      */
     protected $allowedSorts = [
         'id',
-        'first_name',
-        'last_name',
+        'name',
         'email',
-        'address_id',
         'updated_at',
         'created_at',
     ];
-
-    public function reviews()
-    {
-        return $this->hasMany(Review::class);
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    public function address()
-    {
-        return $this->belongsTo(Address::class);
-    }
-
-    public function cart()
-    {
-        return $this->hasOne(Cart::class);
-    }
 }
